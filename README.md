@@ -119,13 +119,6 @@ We're using a couple of devise modules. See Devise Modules below.
 ## Startup the app.
 	`rails s -p 3333`
 
-## Add the Devise views to your app.
-	`rails g devise:views`
-	
-This will copy the views that are typically in the Devise gem to your app. Then you can modify these views as needed.
-
-Lets look at a couple of these.
-
 
 ## Add login/logout links to Layout
  <% if user_signed_in? %>
@@ -137,16 +130,20 @@ Lets look at a couple of these.
       <%= link_to "Login", new_user_session_path %>
     <% end %>
   </div>
-  
-  
-## Generate a Article resource
- `rails g scaffold Article title body:text category state`
+
+
 
 ## Only allow logged in users the ability to create, update or delete users.
 In the Articles controller.
 	`  before_filter :authenticate_user!, except: [:index,:show]`
 	
-##	
+## Add the Devise views to your app.
+	`rails g devise:views`
+	
+This will copy the views that are typically in the Devise gem to your app. Then you can modify these views as needed.
+
+Lets look at a couple of these.
+  
 
 ## Devise Modules
 * database-authenticatable  	Handles authentication of a user, as well as password encryption.
