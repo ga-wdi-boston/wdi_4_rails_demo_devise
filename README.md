@@ -135,7 +135,9 @@ We're using a couple of devise modules. See Devise Modules below.
 
 ## Only allow logged in users the ability to create, update or delete users.
 In the Articles controller.
-	`  before_filter :authenticate_user!, except: [:index,:show]`
+	`before_action :authenticate_user!, except: [:index,:show]`
+	
+Now try to update an article. You should not be allowed!	
 	
 ## Add the Devise views to your app.
 	`rails g devise:views`
