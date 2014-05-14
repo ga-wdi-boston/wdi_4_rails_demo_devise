@@ -137,7 +137,17 @@ We're using a couple of devise modules. See Devise Modules below.
 In the Articles controller.
 	`before_action :authenticate_user!, except: [:index,:show]`
 	
-Now try to update an article. You should not be allowed!	
+Now try to update an article. You should not be allowed!
+
+## Create some Users
+In the seed.rb file add.
+
+<code>User.delete_all
+puts 'Creating Users'  
+User.create!(email: 'joe@example.com', password: 'password')  
+User.create!(email: 'jill@example.com', password: 'password')  
+User.create!(email: 'tom@example.com', password: 'password')  
+</code>
 	
 ## Add the Devise views to your app.
 	`rails g devise:views`
