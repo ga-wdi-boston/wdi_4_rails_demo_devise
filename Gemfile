@@ -37,6 +37,8 @@ group :test do
 end
 
 group :development, :test do
+  gem 'faker' # for generating seed data
+  
   gem 'rspec-rails'
   gem 'database_cleaner'
   gem 'shoulda-matchers'

@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20140513125113) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
-    t.string   "content"
+    t.text     "content"
     t.string   "category"
     t.string   "status",     default: "draft"
     t.datetime "created_at"
