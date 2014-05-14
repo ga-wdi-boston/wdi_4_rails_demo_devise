@@ -119,13 +119,6 @@ We're using a couple of devise modules. See Devise Modules below.
 ## Startup the app.
 	`rails s -p 3333`
 
-## Add the Devise views to your app.
-	`rails g devise:views`
-	
-This will copy the views that are typically in the Devise gem to your app. Then you can modify these views as needed.
-
-Lets look at a couple of these.
-
 
 ## Add login/logout links to Layout
  <% if user_signed_in? %>
@@ -137,16 +130,58 @@ Lets look at a couple of these.
       <%= link_to "Login", new_user_session_path %>
     <% end %>
   </div>
-  
-  
-## Generate a Article resource
- `rails g scaffold Article title body:text category state`
+
+
 
 ## Only allow logged in users the ability to create, update or delete users.
 In the Articles controller.
-	`  before_filter :authenticate_user!, except: [:index,:show]`
+	`before_action :authenticate_user!, except: [:index,:show]`
 	
-##	
+Now try to update an article. You should not be allowed!
+
+## Create some Users
+In the seed.rb file add.
+
+<code>User.delete_all
+puts 'Creating Users'  
+User.create!(email: 'joe@example.com', password: 'password')  
+User.create!(email: 'jill@example.com', password: 'password')  
+User.create!(email: 'tom@example.com', password: 'password')  
+</code>
+
+## Add a ManageArticle relationship
+ `r g model ManagedArticle user:belongs_to article:belongs_to role`
+ 
+ In the User model, user.rb add.  
+  <code>
+  	has_many :managed_articles  
+	has_many :articles, through: :managed_articles  
+  </code>
+
+In the seed file add.  
+<code> 
+joe = User.first  
+3.times do |i|  
+  joe.articles.create!(title: "joes_article_#{i}", content: Faker::Lorem.paragraphs(i % 5).join(' '), category: Article::CATEGORIES.sample, status: Article::STATUSES.sample)  
+end  
+</code>
+
+### Allow users the ability see their managed articles.
+Add the below to the Article index action.  
+<code>
+ if current_user  
+      @articles = current_user.articles  
+    else  
+      @articles = Article.all  
+    end  
+</code>	
+## Add the Devise views to your app.
+	`rails g devise:views`
+	
+This will copy the views that are typically in the Devise gem to your app. Then you can modify these views as needed.
+
+Lets look at a couple of these.
+  
 
 ## Devise Modules
 * database-authenticatable  	Handles authentication of a user, as well as password encryption.
