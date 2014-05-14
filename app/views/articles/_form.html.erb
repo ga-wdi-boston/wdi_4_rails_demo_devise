@@ -21,11 +21,11 @@
   </div>
   <div class="field">
     <%= f.label :category %><br>
-    <%= f.text_field :category %>
+    <%= f.select(:category, Article::CATEGORIES.map{ |a| [ a.capitalize, a ]}) %>
   </div>
   <div class="field">
     <%= f.label :status %><br>
-    <%= f.text_field :status %>
+    <%= f.select(:status, Article::STATUSES.map{ |status| [ status.capitalize, status ]}) %>
   </div>
   <div class="actions">
     <%= f.submit %>
