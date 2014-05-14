@@ -7,8 +7,6 @@ Devise.setup do |config|
   # config.secret_key = '322f1e1e78e070945b9858399f0024805ec3218a90e9fd773bffc702ef541e8d741587e71485e7064f597f04e67a0edf1a6f4e3134bd4536804b7383e6fbfb0c'
 
   # ==> Mailer Configuration
-  config.action_mailer.default_url_options = { host: 'localhost:3000' }
-
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
