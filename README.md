@@ -164,9 +164,17 @@ joe = User.first
 3.times do |i|  
   joe.articles.create!(title: "joes_article_#{i}", content: Faker::Lorem.paragraphs(i % 5).join(' '), category: Article::CATEGORIES.sample, status: Article::STATUSES.sample)  
 end  
-
 </code>
-	
+
+### Allow users the ability see their managed articles.
+Add the below to the Article index action.  
+<code>
+ if current_user  
+      @articles = current_user.articles  
+    else  
+      @articles = Article.all  
+    end  
+</code>	
 ## Add the Devise views to your app.
 	`rails g devise:views`
 	
