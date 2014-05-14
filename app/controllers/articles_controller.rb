@@ -7,7 +7,11 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @articles = Article.all
+    if user_signed_in?
+      @articles = current_user.articles
+    else
+      @articles = Article.all      
+    end
   end
 
   # GET /articles/1
@@ -66,8 +70,11 @@ class ArticlesController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.find(params[:id])
+  def set_article
+    if user_signed_in?
+     @article =  current_user.articles.find(params[:id])
+    end
+    #       @article = Article.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
